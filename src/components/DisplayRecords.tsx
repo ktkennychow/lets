@@ -27,12 +27,12 @@ export default function DisplayRecords({
   }
 
   return (
-    <div className='max-w-[640px]'>
-      <h2 className='text-2xl font-bold'>Your Exercise Log</h2>
-      <div className='flex-col'>
+    <div className='max-w-[640px] w-full m-auto'>
+      <h2 className='text-2xl font-bold'>Current Progress</h2>
+      <div className='flex-col flex w-full'>
         {exercises.map((exercise) => (
-          <div key={exercise.id} className='flex w-full min-h-[80px] group'>
-            <div className='flex-col w-32 justify-between flex bg-zinc-800 group-first:rounded-tl-md'>
+          <div key={exercise.id} className='flex w-full flex-1 min-h-[80px] group'>
+            <div className='flex-col w-1/2 flex-1 justify-between flex bg-zinc-800 group-first:rounded-tl-md'>
               <div className='flex-col p-2'>
                 <p className='text-md'>{exercise.name}</p>
                 <p className='text-xs'>{exercise.note}</p>
@@ -53,34 +53,45 @@ export default function DisplayRecords({
               </div>
             </div>
             {/* display last four records only */}
-            <div className='flex flex-1 overflow-x-scroll scroll-smooth no-scrollbar overscroll-none'>
-              {exercise.records.slice(-6).map((record) => (
+            <div className='flex flex-1 w-1/2'>
+              {exercise.records.slice(-1).map((record) => (
                 <div
                   key={record.date}
-                  className='flex-col bg-zinc-200 last:bg-white text-zinc-500 last:text-zinc-900 last:rounded-r-md text-center min-w-[100px] w-1/4 relative flex justify-between group shadow-zinc-500 shadow-lg'>
-                  <div className='flex-col absolute flex top-0 right-0 h-10'>
-                    <button
-                      id={exercise.id}
-                      value={record.date}
-                      onClick={handleEditRecord}
-                      className='text-xs bg-zinc-300 hover:bg-zinc-800 text-zinc-100 w-5 h-5 group-last:rounded-tr-md'>
-                      E
-                    </button>
-                    <hr />
-                    <button
-                      id={exercise.id}
-                      value={record.date}
-                      onClick={handleDeleteRecord}
-                      className='text-xs bg-zinc-300 hover:bg-red-500 text-zinc-100 w-5 h-5 rounded-bl-md'>
-                      x
-                    </button>
+                  className='flex-col bg-zinc-200 last:bg-white text-zinc-500 last:text-zinc-900 last:rounded-r-md text-center min-w-[100px] w-full relative flex justify-between shadow-zinc-500 shadow-lg'>
+                  <div className='flex flex-1 '>
+                    <div className='flex flex-1 justify-evenly items-center'>
+                      <div className='border-4 border-zinc-500 rounded-full w-12 h-12 items-center justify-center flex-col flex '>
+                        <p>{record.reps}</p>
+                        <p>rep</p>
+                      </div>
+                      <div className='border-4 border-zinc-500 rounded-full w-12 h-12 items-center justify-center flex-col flex '>
+                        <p>{record.sets}</p>
+                        <p>set</p>
+                      </div>
+                      <div className='border-4 border-zinc-500 rounded-full w-12 h-12 items-center justify-center flex-col flex '>
+                        <p>{record.addedWeight}</p>
+                        <p>kg</p>
+                      </div>
+                    </div>
+                    <div className='flex-col flex w-5 h-10'>
+                      <button
+                        id={exercise.id}
+                        value={record.date}
+                        onClick={handleEditRecord}
+                        className='text-xs bg-zinc-300 hover:bg-zinc-800 text-zinc-100 w-5 h-5 rounded-tr-md'>
+                        E
+                      </button>
+                      <hr />
+                      <button
+                        id={exercise.id}
+                        value={record.date}
+                        onClick={handleDeleteRecord}
+                        className='text-xs bg-zinc-300 hover:bg-red-500 text-zinc-100 w-5 h-5 rounded-bl-md'>
+                        x
+                      </button>
+                    </div>
                   </div>
-                  <div className='flex-col p-2'>
-                    <p>{record.reps} rep</p>
-                    <p>{record.sets} set</p>
-                    <p>{record.addedWeight} kg</p>
-                  </div>
-                  <p className='text-xs justify-self-end w-full bg-zinc-300 group-last:rounded-br-md group-last:bg-zinc-100'>
+                  <p className='text-xs justify-self-end w-full rounded-br-md bg-zinc-100'>
                     {timestampToDate(record.date)}
                   </p>
                 </div>
@@ -89,7 +100,7 @@ export default function DisplayRecords({
           </div>
         ))}
       </div>
-      <div className='w-32 bg-zinc-800 h-16 flex justify-center items-center rounded-bl-md'>
+      <div className='w-1/2 bg-zinc-800 h-16 flex justify-center items-center rounded-bl-md'>
         <button
           className='h-8 w-8 rounded-full bg-green-600 items-center flex justify-center'
           onClick={handleOpenModal}>
