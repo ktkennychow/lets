@@ -63,6 +63,15 @@
 
 ## V0.2 Features
 
+- [] turn into a SPA
+  - [] 1 - current Progress page
+    - [x] show only the most recent record
+  - [] 2 - Start an exercise page
+    - [] 2 ways to add arecord
+      - [] timer follow
+      - [] manually
+  - [] 3 - History page
+
 ## Bugs
 
 - [x] new record is added twice when handleAddRecord is called
