@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+todo.md
+sketch.excalidraw
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
