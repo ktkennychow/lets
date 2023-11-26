@@ -79,7 +79,9 @@ function App() {
   function handleDeleteExercise({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
     const id = currentTarget.id;
     const targetExercise = exercises.find((exercise) => exercise.id === id);
-    const isConfirm = window.confirm(`Are you sure you want to delete ${targetExercise?.name} and its records?`);
+    const isConfirm = window.confirm(
+      `Are you sure you want to delete ${targetExercise?.name} and its records?`
+    );
     if (isConfirm) {
       setExercises((prev) => {
         const newExercises = prev.filter((exercise) => exercise.id !== id);
@@ -130,7 +132,9 @@ function App() {
         const exercises = [...prev];
         const exerciseIndex = exercises.findIndex((exercise) => exercise.id === exerciseId);
         const targetExercise = { ...exercises[exerciseIndex] };
-        const newRecords = targetExercise.records.filter((record) => record.date !== Number(recordDate));
+        const newRecords = targetExercise.records.filter(
+          (record) => record.date !== Number(recordDate)
+        );
         const newTargetExercise = {
           ...targetExercise,
           records: newRecords,
@@ -154,7 +158,9 @@ function App() {
       const exercises = [...prev];
       const exerciseIndex = exercises.findIndex((exercise) => exercise.id === exerciseId);
       const targetExercise = { ...exercises[exerciseIndex] };
-      const targetRecord = targetExercise.records.find((record) => record.date === Number(recordDate));
+      const targetRecord = targetExercise.records.find(
+        (record) => record.date === Number(recordDate)
+      );
       let editedSets = window.prompt('Edit sets', String(targetRecord!.sets));
       let editedReps = window.prompt('Edit reps', String(targetRecord!.reps));
       let editedWeight = window.prompt('Edit weight', String(targetRecord!.addedWeight));
@@ -190,11 +196,13 @@ function App() {
   }
 
   return (
-    <div className='text-white h-full font-sans relative no-scrollbar'>
+    <div className='no-scrollbar relative h-full font-sans text-white'>
       <div className='flex-col p-6 md:p-10'>
         <div className='flex justify-between'>
           <h1 className='text-3xl'>Train Right</h1>
-          {errorMessage !== '' ? <p className='text-red-600 py-2 px-3 bg-white rounded-md'>{errorMessage}</p> : null}
+          {errorMessage !== '' ? (
+            <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
+          ) : null}
         </div>
         <hr className='my-5' />
         <div className='flex-col space-y-10 md:flex'>
@@ -206,7 +214,7 @@ function App() {
             handleDeleteRecord={handleDeleteRecord}
             setShowAddExerciseModal={setShowAddExerciseModal}
           />
-          <div className='flex-col space-y-10 w-full min-w-[240p]'>
+          <div className='w-full min-w-[240p] flex-col space-y-10'>
             <AddRecord
               exercises={exercises}
               addedWeight={addedWeight}
@@ -221,9 +229,9 @@ function App() {
         </div>
       </div>
       {showAddExerciseModal ? (
-        <div className='absolute text-white top-0 right-0 z-10 h-full w-full bg-zinc-900/[0.8] flex'>
-          <div className='flex h-[100svh] w-screen justify-center items-center'>
-            <div className='w-72 bg-zinc-900 rounded-md flex-col flex'>
+        <div className='absolute right-0 top-0 z-10 flex h-full w-full bg-zinc-900/[0.8] text-white'>
+          <div className='flex h-[100svh] w-screen items-center justify-center'>
+            <div className='flex w-72 flex-col rounded-md bg-zinc-900'>
               <AddExercise
                 newExerciseName={newExerciseName}
                 note={note}

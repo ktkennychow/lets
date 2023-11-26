@@ -53,11 +53,11 @@ export default function AddRecord({
   return (
     <div className='flex-col'>
       <h2 className='text-2xl font-bold'>Add a record</h2>
-      <div className='flex-col space-y-2 my-2 items-center'>
+      <div className='my-2 flex-col items-center space-y-2'>
         <select
           name='exercise'
           id='exercise'
-          className='bg-zinc-100 text-zinc-900 rounded-sm p-1.5 block w-full'
+          className='block w-full rounded-sm bg-zinc-100 p-1.5 text-zinc-900'
           onChange={handleChange}
           value={selectedExerciseId}>
           {exercises.map((exercise) => (
@@ -66,7 +66,7 @@ export default function AddRecord({
             </option>
           ))}
         </select>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <p>reps</p>
           <input
             type='number'
@@ -75,10 +75,10 @@ export default function AddRecord({
             min='1'
             max='30'
             step='1'
-            className='bg-zinc-100 text-zinc-900 rounded-sm p-1.5 w-16 text-center'
+            className='w-16 rounded-sm bg-zinc-100 p-1.5 text-center text-zinc-900'
           />
         </div>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <p>sets</p>
           <input
             type='number'
@@ -87,10 +87,10 @@ export default function AddRecord({
             min='1'
             max='10'
             step='1'
-            className='bg-zinc-100 text-zinc-900 rounded-sm p-1.5 w-16 text-center'
+            className='w-16 rounded-sm bg-zinc-100 p-1.5 text-center text-zinc-900'
           />
         </div>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <p>weight</p>
           <input
             type='number'
@@ -99,13 +99,13 @@ export default function AddRecord({
             min='0'
             max='300'
             step='1'
-            className='bg-zinc-100 text-zinc-900 rounded-sm p-1.5 w-16 text-center'
+            className='w-16 rounded-sm bg-zinc-100 p-1.5 text-center text-zinc-900'
           />
         </div>
         <button
           id={selectedExerciseId}
           onClick={handleAddRecord}
-          className='text-sm bg-zinc-100 text-zinc-900 py-1 px-2 rounded-sm w-full'>
+          className='w-full rounded-sm bg-zinc-100 px-2 py-1 text-sm text-zinc-900'>
           Confirm
         </button>
       </div>
