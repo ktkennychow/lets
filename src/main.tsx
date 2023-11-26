@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './routes/App.tsx';
+
 import './index.css';
+import Root from './routes/root';
+import ProgressPage from './routes/ProgressPage';
 
 const router = createBrowserRouter([
-  { path: '/', element: <App /> },
-  { path: '/abc', element: <div>abc</div> },
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      { path: '/abc', element: <div>abc</div> },
+      { path: '/progress', element: <ProgressPage /> },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

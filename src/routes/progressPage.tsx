@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid4 } from 'uuid';
-import DisplayRecords from './components/DisplayRecords.jsx';
-import { Exercise } from './types.js';
-import AddRecord from './components/AddRecord.js';
-import AddExercise from './components/AddExercise.js';
+import DisplayRecords from '../components/DisplayRecords';
+import { Exercise } from '../types';
+import AddRecord from '../components/AddRecord';
+import AddExercise from '../components/AddExercise';
+import { Outlet } from 'react-router-dom';
 
-function App() {
+function ProgressPage() {
   const [exercises, setExercises] = useState<Exercise[]>(() => handleGetStoredData());
   // for new exercise
   const [showAddExerciseModal, setShowAddExerciseModal] = useState<boolean>(false);
@@ -199,7 +200,8 @@ function App() {
     <div className='no-scrollbar relative h-full font-sans text-white'>
       <div className='flex-col p-6 md:p-10'>
         <div className='flex justify-between'>
-          <h1 className='text-3xl'>Train Right</h1>
+          <Outlet />
+          <h1 className='text-3xl'>LETS</h1>
           {errorMessage !== '' ? (
             <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
           ) : null}
@@ -248,4 +250,4 @@ function App() {
   );
 }
 
-export default App;
+export default ProgressPage;
