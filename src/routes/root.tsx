@@ -6,15 +6,15 @@ export default function Root() {
       <div className='flex h-12 flex-1 items-center justify-between'>
         <h1 className='text-3xl'>LETS</h1>
         <nav>
-          <ul className='flex flex-1 items-center'>
+          <ul className='flex flex-1 items-center space-x-5'>
             <li>
               <Link to={'progress'}>Lastest Progress</Link>
             </li>
             <li>
-              <Link to={'progress'}>Today's Session</Link>
+              <Link to={'session'}>Today's Session</Link>
             </li>
             <li>
-              <Link to={'progress'}>History</Link>
+              <Link to={'history'}>History</Link>
             </li>
           </ul>
         </nav>

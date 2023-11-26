@@ -5,7 +5,7 @@ import { Exercise } from '../types';
 import AddRecord from '../components/AddRecord';
 import AddExercise from '../components/AddExercise';
 
-function ProgressPage() {
+export default function ProgressPage() {
   const [exercises, setExercises] = useState<Exercise[]>(() => handleGetStoredData());
   // for new exercise
   const [showAddExerciseModal, setShowAddExerciseModal] = useState<boolean>(false);
@@ -243,5 +243,3 @@ function ProgressPage() {
     </div>
   );
 }
-
-export default ProgressPage;

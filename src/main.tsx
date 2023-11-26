@@ -5,12 +5,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './routes/root';
 import ProgressPage from './routes/ProgressPage';
+import SessionPage from './routes/sessionPage';
+import HistoryPage from './routes/historyPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    children: [{ path: '/progress', element: <ProgressPage /> }],
+    children: [
+      { path: '/progress', element: <ProgressPage /> },
+      { path: '/session', element: <SessionPage /> },
+      { path: '/history', element: <HistoryPage /> },
+    ],
   },
 ]);
 
