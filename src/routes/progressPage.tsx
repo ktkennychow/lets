@@ -4,7 +4,6 @@ import DisplayRecords from '../components/DisplayRecords';
 import { Exercise } from '../types';
 import AddRecord from '../components/AddRecord';
 import AddExercise from '../components/AddExercise';
-import { Outlet } from 'react-router-dom';
 
 function ProgressPage() {
   const [exercises, setExercises] = useState<Exercise[]>(() => handleGetStoredData());
@@ -197,16 +196,8 @@ function ProgressPage() {
   }
 
   return (
-    <div className='no-scrollbar relative h-full font-sans text-white'>
-      <div className='flex-col p-6 md:p-10'>
-        <div className='flex justify-between'>
-          <Outlet />
-          <h1 className='text-3xl'>LETS</h1>
-          {errorMessage !== '' ? (
-            <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
-          ) : null}
-        </div>
-        <hr className='my-5' />
+    <div>
+      <div className='flex-col'>
         <div className='flex-col space-y-10 md:flex'>
           <DisplayRecords
             exercises={exercises}
@@ -245,6 +236,9 @@ function ProgressPage() {
             </div>
           </div>
         </div>
+      ) : null}
+      {errorMessage !== '' ? (
+        <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
       ) : null}
     </div>
   );
