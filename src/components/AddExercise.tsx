@@ -7,7 +7,6 @@ type AddExerciseProps = {
   setNewExerciseName: (value: string) => void;
   setNote: (value: string) => void;
   handleAddExercise: () => void;
-  setShowAddExerciseModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export default function AddExercise({
   newExerciseName,
@@ -15,7 +14,6 @@ export default function AddExercise({
   setNewExerciseName,
   setNote,
   handleAddExercise,
-  setShowAddExerciseModal,
 }: AddExerciseProps) {
   const [listOfSimilarExercises, setListOfSimilarExercises] = useState<string[]>([]);
 
@@ -30,11 +28,8 @@ export default function AddExercise({
     setNewExerciseName(userInput);
   }
 
-  function handleCloseModal() {
-    setShowAddExerciseModal(false);
-  }
   return (
-    <div className='relative flex-col p-5'>
+    <div className='flex-col'>
       <h2 className='text-2xl font-bold'>Add an exercise</h2>
       <div className='my-2 flex-col items-center space-y-2'>
         <div className='relative'>
@@ -69,11 +64,6 @@ export default function AddExercise({
           Confirm
         </button>
       </div>
-      <button
-        className='absolute right-2 top-2 h-6 w-6 rounded-sm bg-zinc-300 hover:bg-zinc-700'
-        onClick={handleCloseModal}>
-        x
-      </button>
     </div>
   );
 }

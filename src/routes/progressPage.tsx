@@ -3,6 +3,7 @@ import { v4 as uuid4 } from 'uuid';
 import DisplayRecords from '../components/DisplayRecords';
 import AddExercise from '../components/AddExercise';
 import { useStore } from '../store';
+import Modal from '../components/Modal';
 
 export default function ProgressPage() {
   const exercises = useStore((state) => state.exercises);
@@ -154,20 +155,15 @@ export default function ProgressPage() {
         </div>
       </div>
       {showAddExerciseModal ? (
-        <div className='absolute right-0 top-0 z-10 flex h-full w-full bg-zinc-900/[0.8] text-white'>
-          <div className='flex h-[100svh] w-screen items-center justify-center'>
-            <div className='flex w-72 flex-col rounded-md bg-zinc-900'>
-              <AddExercise
-                newExerciseName={newExerciseName}
-                note={note}
-                setNewExerciseName={setNewExerciseName}
-                setNote={setNote}
-                handleAddExercise={handleAddExercise}
-                setShowAddExerciseModal={setShowAddExerciseModal}
-              />
-            </div>
-          </div>
-        </div>
+        <Modal setShowAddExerciseModal={setShowAddExerciseModal}>
+          <AddExercise
+            handleAddExercise={handleAddExercise}
+            newExerciseName={newExerciseName}
+            note={note}
+            setNewExerciseName={setNewExerciseName}
+            setNote={setNote}
+          />
+        </Modal>
       ) : null}
       {errorMessage !== '' ? (
         <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
