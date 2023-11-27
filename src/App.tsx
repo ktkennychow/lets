@@ -8,10 +8,10 @@ export default function Root() {
         <nav>
           <ul className='flex flex-1 items-center space-x-5'>
             <li>
-              <Link to={'progress'}>Lastest Progress</Link>
+              <Link to={'/progress'}>Progress</Link>
             </li>
             <li>
-              <Link to={'session'}>Today's Session</Link>
+              <Link to={'session'}>Session</Link>
             </li>
             <li>
               <Link to={'history'}>History</Link>

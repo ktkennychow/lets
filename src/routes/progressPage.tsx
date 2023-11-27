@@ -9,7 +9,7 @@ export default function ProgressPage() {
   const exercises = useStore((state) => state.exercises);
   const updateExercises = useStore((state) => state.updateExercises);
   // for new exercise
-  const [showAddExerciseModal, setShowAddExerciseModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [newExerciseName, setNewExerciseName] = useState<string>('');
   const [note, setNote] = useState<string>('');
   // for error message
@@ -38,7 +38,7 @@ export default function ProgressPage() {
     updateExercises([...exercises, newExercise]);
     setNewExerciseName('');
     setNote('');
-    setShowAddExerciseModal(false);
+    setShowModal(false);
   }
 
   function handleEditExercise({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
@@ -150,12 +150,12 @@ export default function ProgressPage() {
             handleDeleteExercise={handleDeleteExercise}
             handleEditRecord={handleEditRecord}
             handleDeleteRecord={handleDeleteRecord}
-            setShowAddExerciseModal={setShowAddExerciseModal}
+            setShowModal={setShowModal}
           />
         </div>
       </div>
-      {showAddExerciseModal ? (
-        <Modal setShowAddExerciseModal={setShowAddExerciseModal}>
+      {showModal ? (
+        <Modal setShowModal={setShowModal}>
           <AddExercise
             handleAddExercise={handleAddExercise}
             newExerciseName={newExerciseName}

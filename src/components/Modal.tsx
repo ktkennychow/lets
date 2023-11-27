@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 type ModalProps = {
   children: ReactNode;
-  setShowAddExerciseModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Modal({ children, setShowAddExerciseModal }: ModalProps) {
+export default function Modal({ children, setShowModal }: ModalProps) {
   function handleCloseModal() {
-    setShowAddExerciseModal(false);
+    setShowModal(false);
   }
   return (
     <div className='absolute right-0 top-0 z-10 flex h-full w-full bg-zinc-900/[0.9] text-white'>

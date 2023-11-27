@@ -5,7 +5,7 @@ type DisplayRecordsProp = {
   handleDeleteExercise: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleEditRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleDeleteRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
-  setShowAddExerciseModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function DisplayRecords({
@@ -13,7 +13,7 @@ export default function DisplayRecords({
   handleDeleteExercise,
   handleEditRecord,
   handleDeleteRecord,
-  setShowAddExerciseModal,
+  setShowModal,
 }: DisplayRecordsProp) {
   const exercises = useStore((state) => state.exercises);
 
@@ -23,7 +23,7 @@ export default function DisplayRecords({
   }
 
   function handleOpenModal() {
-    setShowAddExerciseModal(true);
+    setShowModal(true);
   }
 
   return (

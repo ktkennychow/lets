@@ -1,24 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 
 import './index.css';
-import Root from './routes/root';
+import App from './App';
 import ProgressPage from './routes/ProgressPage';
-import SessionPage from './routes/sessionPage';
-import HistoryPage from './routes/historyPage';
+import HistoryPage from './routes/HistoryPage';
+import SessionPage from './routes/SessionPage';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      { path: '/progress', element: <ProgressPage /> },
-      { path: '/session', element: <SessionPage /> },
-      { path: '/history', element: <HistoryPage /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App />}>
+      <Route path='/progress' element={<ProgressPage />} />
+      <Route path='/session' element={<SessionPage />} />
+      <Route path='/history' element={<HistoryPage />} />
+    </Route>
+  )
+);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
