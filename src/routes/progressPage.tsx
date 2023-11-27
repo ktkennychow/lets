@@ -8,8 +8,10 @@ import Modal from '../components/Modal';
 export default function ProgressPage() {
   const exercises = useStore((state) => state.exercises);
   const updateExercises = useStore((state) => state.updateExercises);
+  const showModal = useStore((state) => state.showModal);
+  const updateShowModal = useStore((state) => state.updateShowModal);
   // for new exercise
-  const [showModal, setShowModal] = useState<boolean>(false);
+
   const [newExerciseName, setNewExerciseName] = useState<string>('');
   const [note, setNote] = useState<string>('');
   // for error message
@@ -38,7 +40,7 @@ export default function ProgressPage() {
     updateExercises([...exercises, newExercise]);
     setNewExerciseName('');
     setNote('');
-    setShowModal(false);
+    updateShowModal(false);
   }
 
   function handleEditExercise({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
@@ -144,18 +146,25 @@ export default function ProgressPage() {
   return (
     <div>
       <div className='flex-col'>
+        <div className='flex flex-1 items-center justify-between'>
+          <h2 className='text-2xl font-bold'>Current Progress</h2>
+          <button
+            className='flex h-8 w-8 items-center justify-center rounded-full bg-green-600'
+            onClick={() => updateShowModal(true)}>
+            <div className='text-2xl'>+</div>
+          </button>
+        </div>
         <div className='flex-col space-y-10 md:flex'>
           <DisplayRecords
             handleEditExercise={handleEditExercise}
             handleDeleteExercise={handleDeleteExercise}
             handleEditRecord={handleEditRecord}
             handleDeleteRecord={handleDeleteRecord}
-            setShowModal={setShowModal}
           />
         </div>
       </div>
       {showModal ? (
-        <Modal setShowModal={setShowModal}>
+        <Modal>
           <AddExercise
             handleAddExercise={handleAddExercise}
             newExerciseName={newExerciseName}
@@ -165,6 +174,7 @@ export default function ProgressPage() {
           />
         </Modal>
       ) : null}
+
       {errorMessage !== '' ? (
         <p className='rounded-md bg-white px-3 py-2 text-red-600'>{errorMessage}</p>
       ) : null}

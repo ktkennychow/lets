@@ -4,6 +4,7 @@ import { useStore } from '../store';
 export default function AddRecord() {
   const exercises = useStore((state) => state.exercises);
   const updateExercises = useStore((state) => state.updateExercises);
+  const updateShowModal = useStore((state) => state.updateShowModal);
 
   // new record
   const [selectedExerciseId, setSelectedExerciseId] = useState(exercises[0]?.id || '');
@@ -59,6 +60,7 @@ export default function AddRecord() {
     setWeight('0');
     setReps('1');
     setSets('1');
+    updateShowModal(false);
   }
 
   function handleChange({ currentTarget }: React.ChangeEvent<HTMLSelectElement>) {

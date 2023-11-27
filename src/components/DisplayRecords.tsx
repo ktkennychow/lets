@@ -5,7 +5,6 @@ type DisplayRecordsProp = {
   handleDeleteExercise: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleEditRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleDeleteRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function DisplayRecords({
@@ -13,7 +12,6 @@ export default function DisplayRecords({
   handleDeleteExercise,
   handleEditRecord,
   handleDeleteRecord,
-  setShowModal,
 }: DisplayRecordsProp) {
   const exercises = useStore((state) => state.exercises);
 
@@ -22,13 +20,8 @@ export default function DisplayRecords({
     return date.toDateString();
   }
 
-  function handleOpenModal() {
-    setShowModal(true);
-  }
-
   return (
-    <div className='m-auto w-full max-w-[640px]'>
-      <h2 className='text-2xl font-bold'>Current Progress</h2>
+    <div className='w-full'>
       <div className='flex w-full flex-col'>
         {exercises.map((exercise) => (
           <div key={exercise.id} className='group flex min-h-[80px] w-full flex-1'>
@@ -99,13 +92,6 @@ export default function DisplayRecords({
             </div>
           </div>
         ))}
-      </div>
-      <div className='flex h-16 w-1/2 items-center justify-center rounded-bl-md bg-zinc-800'>
-        <button
-          className='flex h-8 w-8 items-center justify-center rounded-full bg-green-600'
-          onClick={handleOpenModal}>
-          <div className='text-2xl'>+</div>
-        </button>
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import { Link, Outlet } from 'react-router-dom';
 
 export default function Root() {
   return (
-    <div className='no-scrollbar relative h-full flex-col p-6 font-sans  text-white md:p-10'>
-      <div className='flex h-12 flex-1 items-center justify-between'>
+    <div className='relative mx-auto flex h-full min-h-[90svh] max-w-[640px] flex-1 flex-col p-6 font-sans text-white md:p-10'>
+      <div className='flex max-h-12 flex-1 items-center justify-between'>
         <h1 className='text-6xl font-extrabold italic tracking-[-0.1em]'>LETS</h1>
         <nav>
           <ul className='flex flex-1 items-center space-x-5'>
