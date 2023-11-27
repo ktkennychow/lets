@@ -6,7 +6,7 @@ type State = {
 };
 
 type Action = {
-  setExercises: (exercises: State['exercises']) => void;
+  updateExercises: (exercises: State['exercises']) => void;
 };
 
 function handleGetStoredData() {
@@ -20,5 +20,5 @@ function handleGetStoredData() {
 
 export const useStore = create<State & Action>()((set) => ({
   exercises: handleGetStoredData(),
-  setExercises: (exercises: Exercise[]) => set(() => ({ exercises: exercises })),
+  updateExercises: (exercises: Exercise[]) => set(() => ({ exercises: exercises })),
 }));

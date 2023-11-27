@@ -1,33 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Exercise } from '../types';
+import { useStore } from '../store';
 
-type AddRecordProps = {
-  exercises: Exercise[];
-  addedWeight: string;
-  reps: string;
-  sets: string;
-  setAddedWeight: (value: string) => void;
-  setReps: (value: string) => void;
-  setSets: (value: string) => void;
-  handleAddRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
-};
+export default function AddRecord() {
+  const exercises = useStore((state) => state.exercises);
+  const updateExercises = useStore((state) => state.updateExercises);
 
-export default function AddRecord({
-  exercises,
-  addedWeight,
-  reps,
-  sets,
-  setAddedWeight,
-  setReps,
-  setSets,
-  handleAddRecord,
-}: AddRecordProps) {
+  // new record
   const [selectedExerciseId, setSelectedExerciseId] = useState(exercises[0]?.id || '');
-
-  function handleChange({ currentTarget }: React.ChangeEvent<HTMLSelectElement>) {
-    const userInput = currentTarget.value;
-    setSelectedExerciseId(userInput);
-  }
+  const [weight, setWeight] = useState('0');
+  const [reps, setReps] = useState('1');
+  const [sets, setSets] = useState('1');
 
   useEffect(() => {
     if (exercises.length === 1) {
@@ -40,15 +22,49 @@ export default function AddRecord({
     const latestRecord = selectedExercise?.records.slice(-1)[0];
     // When an exercise is selected, the set up from latest record is entered
     if (latestRecord) {
-      setAddedWeight(String(latestRecord?.addedWeight));
+      setWeight(String(latestRecord?.weight));
       setReps(String(latestRecord?.reps));
       setSets(String(latestRecord?.sets));
     } else {
-      setAddedWeight('0');
+      setWeight('0');
       setReps('1');
       setSets('1');
     }
-  }, [exercises, selectedExerciseId, setAddedWeight, setReps, setSets]);
+  }, [exercises, selectedExerciseId, setWeight, setReps, setSets]);
+
+  function handleAddRecord({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
+    const newRecord = {
+      date: Date.now(),
+      weight: Number(weight),
+      reps: Number(reps),
+      sets: Number(sets),
+    };
+
+    // deepcopying records
+    const id = currentTarget.id;
+    const index = exercises.findIndex((exercise) => exercise.id === id);
+    const targetExercise = { ...exercises[index] };
+    const targetRecords = [...targetExercise.records];
+    targetRecords.push(newRecord);
+    const newTargetExercise = {
+      ...targetExercise,
+      records: targetRecords,
+    };
+
+    const newExercises = exercises.map((exercise) =>
+      exercise.id === newTargetExercise.id ? newTargetExercise : exercise
+    );
+
+    updateExercises(newExercises);
+    setWeight('0');
+    setReps('1');
+    setSets('1');
+  }
+
+  function handleChange({ currentTarget }: React.ChangeEvent<HTMLSelectElement>) {
+    const userInput = currentTarget.value;
+    setSelectedExerciseId(userInput);
+  }
 
   return (
     <div className='flex-col'>
@@ -94,8 +110,8 @@ export default function AddRecord({
           <p>weight</p>
           <input
             type='number'
-            value={addedWeight}
-            onChange={(event) => setAddedWeight(event.target.value)}
+            value={weight}
+            onChange={(event) => setWeight(event.target.value)}
             min='0'
             max='300'
             step='1'

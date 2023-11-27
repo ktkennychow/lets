@@ -1,21 +1,16 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid4 } from 'uuid';
 import DisplayRecords from '../components/DisplayRecords';
-import AddRecord from '../components/AddRecord';
 import AddExercise from '../components/AddExercise';
 import { useStore } from '../store';
 
 export default function ProgressPage() {
   const exercises = useStore((state) => state.exercises);
-  const setExercises = useStore((state) => state.setExercises);
+  const updateExercises = useStore((state) => state.updateExercises);
   // for new exercise
   const [showAddExerciseModal, setShowAddExerciseModal] = useState<boolean>(false);
   const [newExerciseName, setNewExerciseName] = useState<string>('');
   const [note, setNote] = useState<string>('');
-  // for new record
-  const [addedWeight, setAddedWeight] = useState('0');
-  const [reps, setReps] = useState('1');
-  const [sets, setSets] = useState('1');
   // for error message
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -39,7 +34,7 @@ export default function ProgressPage() {
       note: note,
       records: [],
     };
-    setExercises([...exercises, newExercise]);
+    updateExercises([...exercises, newExercise]);
     setNewExerciseName('');
     setNote('');
     setShowAddExerciseModal(false);
@@ -65,7 +60,7 @@ export default function ProgressPage() {
     const newExercises = exercises.map((exercise) =>
       exercise.id !== id ? exercise : editedExercise
     );
-    setExercises(newExercises);
+    updateExercises(newExercises);
   }
 
   function handleDeleteExercise({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
@@ -76,37 +71,8 @@ export default function ProgressPage() {
     );
     if (isConfirm) {
       const newExercises = exercises.filter((exercise) => exercise.id !== id);
-      setExercises(newExercises);
+      updateExercises(newExercises);
     }
-  }
-
-  function handleAddRecord({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
-    const newRecord = {
-      date: Date.now(),
-      addedWeight: Number(addedWeight),
-      reps: Number(reps),
-      sets: Number(sets),
-    };
-
-    // deepcopying records
-    const id = currentTarget.id;
-    const index = exercises.findIndex((exercise) => exercise.id === id);
-    const targetExercise = { ...exercises[index] };
-    const targetRecords = [...targetExercise.records];
-    targetRecords.push(newRecord);
-    const newTargetExercise = {
-      ...targetExercise,
-      records: targetRecords,
-    };
-
-    const newExercises = exercises.map((exercise) =>
-      exercise.id === newTargetExercise.id ? newTargetExercise : exercise
-    );
-
-    setExercises(newExercises);
-    setAddedWeight('0');
-    setReps('1');
-    setSets('1');
   }
 
   function handleDeleteRecord({ currentTarget }: React.MouseEvent<HTMLButtonElement>) {
@@ -128,7 +94,7 @@ export default function ProgressPage() {
       const newExercises = exercises.map((exercise) =>
         exercise.id === newTargetExercise.id ? newTargetExercise : exercise
       );
-      setExercises(newExercises);
+      updateExercises(newExercises);
     }
   }
 
@@ -144,7 +110,7 @@ export default function ProgressPage() {
     );
     let editedSets = window.prompt('Edit sets', String(targetRecord!.sets));
     let editedReps = window.prompt('Edit reps', String(targetRecord!.reps));
-    let editedWeight = window.prompt('Edit weight', String(targetRecord!.addedWeight));
+    let editedWeight = window.prompt('Edit weight', String(targetRecord!.weight));
     if (editedSets === null) {
       editedSets = String(targetRecord!.sets);
     }
@@ -152,13 +118,13 @@ export default function ProgressPage() {
       editedReps = String(targetRecord!.reps);
     }
     if (editedWeight === null) {
-      editedWeight = String(targetRecord!.addedWeight);
+      editedWeight = String(targetRecord!.weight);
     }
     const editRecord = {
       date: targetRecord!.date,
       sets: Number(editedSets),
       reps: Number(editedReps),
-      addedWeight: Number(editedWeight),
+      weight: Number(editedWeight),
     };
     const newRecords = targetExercise.records.map((record) =>
       record.date !== Number(recordDate) ? record : editRecord
@@ -171,7 +137,7 @@ export default function ProgressPage() {
     const newExercises = exercises.map((exercise) =>
       exercise.id === newTargetExercise.id ? newTargetExercise : exercise
     );
-    setExercises(newExercises);
+    updateExercises(newExercises);
   }
 
   return (
@@ -179,25 +145,12 @@ export default function ProgressPage() {
       <div className='flex-col'>
         <div className='flex-col space-y-10 md:flex'>
           <DisplayRecords
-            exercises={exercises}
             handleEditExercise={handleEditExercise}
             handleDeleteExercise={handleDeleteExercise}
             handleEditRecord={handleEditRecord}
             handleDeleteRecord={handleDeleteRecord}
             setShowAddExerciseModal={setShowAddExerciseModal}
           />
-          <div className='w-full min-w-[240p] flex-col space-y-10'>
-            <AddRecord
-              exercises={exercises}
-              addedWeight={addedWeight}
-              reps={reps}
-              sets={sets}
-              setAddedWeight={setAddedWeight}
-              setReps={setReps}
-              setSets={setSets}
-              handleAddRecord={handleAddRecord}
-            />
-          </div>
         </div>
       </div>
       {showAddExerciseModal ? (

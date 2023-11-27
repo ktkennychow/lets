@@ -6,7 +6,7 @@ type Exercise = {
 };
 type Record = {
   date: number;
-  addedWeight: number;
+  weight: number;
   reps: number;
   sets: number;
 };

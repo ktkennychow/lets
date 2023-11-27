@@ -1,7 +1,6 @@
-import { Exercise } from '../types';
+import { useStore } from '../store';
 
 type DisplayRecordsProp = {
-  exercises: Exercise[];
   handleEditExercise: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleDeleteExercise: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
   handleEditRecord: ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => void;
@@ -10,13 +9,14 @@ type DisplayRecordsProp = {
 };
 
 export default function DisplayRecords({
-  exercises,
   handleEditExercise,
   handleDeleteExercise,
   handleEditRecord,
   handleDeleteRecord,
   setShowAddExerciseModal,
 }: DisplayRecordsProp) {
+  const exercises = useStore((state) => state.exercises);
+
   function timestampToDate(timestamp: number): string {
     const date = new Date(timestamp);
     return date.toDateString();
@@ -69,7 +69,7 @@ export default function DisplayRecords({
                         <p>set</p>
                       </div>
                       <div className='flex h-12 w-12 flex-col items-center justify-center rounded-full border-4 border-zinc-500 '>
-                        <p>{record.addedWeight}</p>
+                        <p>{record.weight}</p>
                         <p>kg</p>
                       </div>
                     </div>
