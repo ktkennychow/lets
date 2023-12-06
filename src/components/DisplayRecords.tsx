@@ -54,12 +54,12 @@ export default function DisplayRecords({
                   <div className='flex flex-1 '>
                     <div className='flex flex-1 items-center justify-evenly'>
                       <div className='flex h-12 w-12 flex-col items-center justify-center rounded-full border-4 border-zinc-500 '>
-                        <p>{record.reps}</p>
-                        <p>rep</p>
-                      </div>
-                      <div className='flex h-12 w-12 flex-col items-center justify-center rounded-full border-4 border-zinc-500 '>
                         <p>{record.sets}</p>
                         <p>set</p>
+                      </div>
+                      <div className='flex h-12 w-12 flex-col items-center justify-center rounded-full border-4 border-zinc-500 '>
+                        <p>{record.reps}</p>
+                        <p>rep</p>
                       </div>
                       <div className='flex h-12 w-12 flex-col items-center justify-center rounded-full border-4 border-zinc-500 '>
                         <p>{record.weight}</p>
