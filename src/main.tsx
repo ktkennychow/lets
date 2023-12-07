@@ -12,6 +12,7 @@ import App from './App';
 import ProgressPage from './routes/ProgressPage';
 import HistoryPage from './routes/HistoryPage';
 import SessionPage from './routes/SessionPage';
+import SettingPage from './routes/SettingPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path='/progress' element={<ProgressPage />} />
       <Route path='/session' element={<SessionPage />} />
       <Route path='/history' element={<HistoryPage />} />
+      <Route path='/setting' element={<SettingPage />} />
     </Route>
   )
 );
